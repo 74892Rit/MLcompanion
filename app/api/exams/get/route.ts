@@ -36,7 +36,7 @@ export async function GET() {
         }
 
         return {
-          id: exam.id.toString(),
+          id: exam._id.toString(),
           subject: exam.title || "Untitled Exam",
           teacher: {
             name: exam.createdBy ? "Instructor" : "TBD",
