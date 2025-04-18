@@ -149,7 +149,9 @@ const FeaturesSection: React.FC = () => {
         ].map((feature, index) => (
           <div
             key={index}
-            ref={(el) => (cardsRef.current[index] = el)}
+            ref={(el) => {
+              cardsRef.current[index] = el;
+            }}
             className="opacity-0"
           >
             <FeatureCard {...feature} />
