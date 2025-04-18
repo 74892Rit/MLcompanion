@@ -22,7 +22,7 @@ import Link from "next/link";
 import useSWR from "swr";
 
 // Fetch function for SWR
-const fetcher = (url) =>
+const fetcher = (url: string) =>
   fetch(url).then((res) => {
     if (!res.ok) {
       throw new Error(`Error: ${res.status}`);
@@ -31,7 +31,7 @@ const fetcher = (url) =>
   });
 
 // Helper function to format date
-const formatDate = (dateString) => {
+const formatDate = (dateString: string) => {
   if (!dateString) return "";
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
@@ -66,7 +66,7 @@ export default function ProfilePage() {
         bio: data.bio || "No bio available",
         skills:
           data.skills && data.skills.length > 0
-            ? data.skills
+            ? (data.skills as { name: string; level: number }[])
             : [
                 { name: "PyTorch", level: 95 },
                 { name: "TensorFlow", level: 90 },
@@ -76,7 +76,13 @@ export default function ProfilePage() {
               ],
         projects:
           data.projects && data.projects.length > 0
-            ? data.projects
+            ? (data.projects as {
+                id: number;
+                name: string;
+                description: string;
+                stars: number;
+                forks: number;
+              }[])
             : [
                 {
                   id: 1,
@@ -110,7 +116,7 @@ export default function ProfilePage() {
         },
         achievements:
           data.achievements && data.achievements.length > 0
-            ? data.achievements
+            ? (data.achievements as string[])
             : [
                 "Best Paper Award at ML Conference 2023",
                 "Kaggle Competition Top 1%",
@@ -185,22 +191,24 @@ export default function ProfilePage() {
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
               <h3 className="mb-4 text-xl font-semibold">Skills</h3>
               <div className="space-y-4">
-                {userData.skills.map((skill, index) => (
-                  <div key={index}>
-                    <div className="mb-1 flex justify-between">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-sm text-gray-500">
-                        {skill.level}%
-                      </span>
+                {userData.skills.map(
+                  (skill: { name: string; level: number }, index) => (
+                    <div key={index}>
+                      <div className="mb-1 flex justify-between">
+                        <span className="font-medium">{skill.name}</span>
+                        <span className="text-sm text-gray-500">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+                        <div
+                          className="h-full rounded-full bg-indigo-600"
+                          style={{ width: `${skill.level}%` }}
+                        ></div>
+                      </div>
                     </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-                      <div
-                        className="h-full rounded-full bg-indigo-600"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             </div>
 
@@ -254,34 +262,42 @@ export default function ProfilePage() {
       case "projects":
         return (
           <div className="space-y-6">
-            {userData.projects.map((project) => (
-              <div
-                key={project.id}
-                className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-xl font-semibold">{project.name}</h3>
-                    <p className="mt-1 text-gray-600 dark:text-gray-300">
-                      {project.description}
-                    </p>
+            {userData.projects.map(
+              (project: {
+                id: number;
+                name: string;
+                description: string;
+                stars: number;
+                forks: number;
+              }) => (
+                <div
+                  key={project.id}
+                  className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="text-xl font-semibold">{project.name}</h3>
+                      <p className="mt-1 text-gray-600 dark:text-gray-300">
+                        {project.description}
+                      </p>
+                    </div>
+                    <button className="rounded-md border border-gray-200 bg-white px-3 py-1 text-sm font-medium dark:border-gray-700 dark:bg-gray-800">
+                      Open
+                    </button>
                   </div>
-                  <button className="rounded-md border border-gray-200 bg-white px-3 py-1 text-sm font-medium dark:border-gray-700 dark:bg-gray-800">
-                    Open
-                  </button>
+                  <div className="mt-4 flex gap-4">
+                    <div className="flex items-center gap-1 text-sm text-gray-500">
+                      <Star className="size-4" />
+                      <span>{project.stars}</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-sm text-gray-500">
+                      <GitBranch className="size-4" />
+                      <span>{project.forks}</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-4 flex gap-4">
-                  <div className="flex items-center gap-1 text-sm text-gray-500">
-                    <Star className="size-4" />
-                    <span>{project.stars}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-sm text-gray-500">
-                    <GitBranch className="size-4" />
-                    <span>{project.forks}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+              )
+            )}
 
             <div className="flex justify-center pt-4">
               <button className="flex items-center gap-1 rounded-md bg-indigo-50 px-4 py-2 text-indigo-600 hover:bg-indigo-100 dark:bg-gray-700 dark:text-indigo-400 dark:hover:bg-gray-600">
@@ -296,20 +312,25 @@ export default function ProfilePage() {
           <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <h3 className="mb-4 text-xl font-semibold">Recent Activity</h3>
             <div className="space-y-4">
-              {userData.activity.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex gap-4 border-b border-gray-100 pb-4 dark:border-gray-700"
-                >
-                  <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-900">
-                    <BarChart2 className="size-5 text-indigo-600 dark:text-indigo-400" />
+              {userData.activity.map(
+                (
+                  item: { type: string; event: string; time: string },
+                  index: number
+                ) => (
+                  <div
+                    key={index}
+                    className="flex gap-4 border-b border-gray-100 pb-4 dark:border-gray-700"
+                  >
+                    <div className="rounded-full bg-indigo-100 p-2 dark:bg-indigo-900">
+                      <BarChart2 className="size-5 text-indigo-600 dark:text-indigo-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium">{item.event}</p>
+                      <p className="text-sm text-gray-500">{item.time}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium">{item.event}</p>
-                    <p className="text-sm text-gray-500">{item.time}</p>
-                  </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         );
