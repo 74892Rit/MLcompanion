@@ -1,7 +1,9 @@
 export interface Question {
   id: string;
   type: "multiple-choice" | "short-answer" | "true-false";
-  text: string;
+  topic: string; // for frontend display
+  questionText: string; // previously 'text'
+  difficulty: "easy" | "medium" | "hard"; // assumed based on usage
   points: number;
   options?: {
     id: string;

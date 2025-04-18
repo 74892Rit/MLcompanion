@@ -1,3 +1,4 @@
+import { Question } from "@/types/exam";
 import React, {
   createContext,
   useState,
@@ -14,6 +15,7 @@ export default s;
 
 // Exam Interface
 export interface MLExam {
+  questions: Question[];
   id: string;
   subject: string;
   title: string;
