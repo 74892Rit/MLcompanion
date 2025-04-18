@@ -8,7 +8,7 @@ import UploadDataset from "@/components/datasetmanagment/Uploaddataset";
 
 const DatasetsPage = () => {
   const [activeTab, setActiveTab] = useState("list");
-  const [selectedDataset, setSelectedDataset] = useState(null);
+  const [selectedDataset, setSelectedDataset] = useState<string | null>(null);
 
   const tabs = [
     { id: "list", label: "Available Datasets", icon: List },
@@ -72,7 +72,7 @@ const DatasetsPage = () => {
             />
           )}
           {activeTab === "preview" && selectedDataset && (
-            <DatasetPreview dataset={selectedDataset} />
+            <DatasetPreview dataset-name={selectedDataset} />
           )}
           {activeTab === "preview" && !selectedDataset && (
             <div className="flex h-64 flex-col items-center justify-center text-gray-500 transition-colors dark:text-gray-400">
