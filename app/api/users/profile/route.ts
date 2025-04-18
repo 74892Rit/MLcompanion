@@ -108,7 +108,14 @@ export async function PUT(req: NextRequest) {
       "code" in error &&
       (error as any).code === 11000
     ) {
-    
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Duplicate key error (e.g., username already exists)",
+        },
+        { status: 400 }
+      );
+    }
 
     return NextResponse.json(
       { success: false, message: "Server error" },
