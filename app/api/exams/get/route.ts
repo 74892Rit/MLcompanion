@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { NextResponse } from "next/server";
 import connectDB from "@/database/mongoose";
 import Exam from "@/database/models/exam.model";
@@ -36,7 +37,7 @@ export async function GET() {
         }
 
         return {
-          id: exam._id.toString(),
+          id: (exam._id as Types.ObjectId).toString(),
           subject: exam.title || "Untitled Exam",
           teacher: {
             name: exam.createdBy ? "Instructor" : "TBD",
