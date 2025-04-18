@@ -11,6 +11,7 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  // eslint-disable-next-line no-undef
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(""); // Reset errors

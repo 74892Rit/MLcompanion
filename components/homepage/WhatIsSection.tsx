@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { FiServer, FiZap } from "react-icons/fi";
 
 const WhatIsSection: React.FC = () => {
   return (

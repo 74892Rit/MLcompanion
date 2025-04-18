@@ -10,6 +10,7 @@ export default function SignIn() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  // eslint-disable-next-line no-undef
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) return setError("All fields are required");
@@ -54,7 +55,7 @@ export default function SignIn() {
         </button>
       </form>
       <p className="mt-4">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link href="/sign-up" className="text-blue-500">
           Sign Up
         </Link>

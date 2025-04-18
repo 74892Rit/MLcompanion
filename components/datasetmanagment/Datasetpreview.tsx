@@ -170,7 +170,8 @@ const DatasetPreview = () => {
       ) : !loading && !error ? (
         <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-700 dark:bg-gray-800">
           <p className="text-gray-500 dark:text-gray-400">
-            Enter a dataset name and click "Load Data" to view the table
+            Enter a dataset name and click &quot;Load Data&quot; to view the
+            table
           </p>
         </div>
       ) : null}

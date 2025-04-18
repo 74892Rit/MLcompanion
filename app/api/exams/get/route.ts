@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/database/mongoose";
 import Exam from "@/database/models/exam.model";
 import "@/database/models/question.model";
-import User from "@/database/models/user.model";
+// import User from "@/database/models/user.model";
 export async function GET() {
   try {
     console.log("✅ Fetching exams API hit");
@@ -36,7 +36,7 @@ export async function GET() {
         }
 
         return {
-          id: exam._id.toString(),
+          id: exam.id.toString(),
           subject: exam.title || "Untitled Exam",
           teacher: {
             name: exam.createdBy ? "Instructor" : "TBD",

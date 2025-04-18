@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 "use client"; // This makes it a Client Component
 
 import { SessionProvider } from "next-auth/react";
