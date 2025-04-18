@@ -102,12 +102,13 @@ export async function PUT(req: NextRequest) {
     console.error("Error updating profile:", error);
 
     // Check for duplicate key error (e.g., username already exists)
-    if (error.code === 11000) {
-      return NextResponse.json(
-        { success: false, message: "Username already exists" },
-        { status: 400 }
-      );
-    }
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      (error as any).code === 11000
+    ) {
+    
 
     return NextResponse.json(
       { success: false, message: "Server error" },
