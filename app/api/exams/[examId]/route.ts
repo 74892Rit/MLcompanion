@@ -6,7 +6,7 @@ import { isValidObjectId } from "mongoose";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { examId: string } }
+  { params }: { params: Promise<{ examId: string }> }
 ) {
   try {
     const token = await getToken({ req });
@@ -15,7 +15,8 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { examId } = params;
+    // const { examId } = params;
+    const examId = (await params).examId;
 
     if (!examId || !isValidObjectId(examId)) {
       return NextResponse.json(
