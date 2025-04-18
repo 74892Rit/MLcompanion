@@ -6,6 +6,6 @@ export default async function ExamWrapper({
 }: {
   params: { examId: string };
 }) {
-  const examId = params.examId;
+  const examId = (await params).examId;
   return <ExamPage examId={examId} />;
 }
