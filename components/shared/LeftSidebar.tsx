@@ -132,7 +132,7 @@ export default function LeftSidebar({ isOpen }: LeftSidebarProps) {
       {isLoading ? (
         // Loading state
         <div className="mb-6 flex flex-col items-center">
-          <div className="h-15 w-15 animate-pulse rounded-full bg-gray-300 dark:bg-gray-700"></div>
+          <div className="size-16 animate-pulse rounded-full bg-gray-300 dark:bg-gray-700"></div>
           <div className="mt-2 h-4 w-32 animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
           <div className="mt-1 h-3 w-24 animate-pulse rounded bg-gray-300 dark:bg-gray-700"></div>
         </div>
@@ -156,7 +156,7 @@ export default function LeftSidebar({ isOpen }: LeftSidebarProps) {
       ) : (
         // Not authenticated
         <div className="mb-6 flex flex-col items-center">
-          <div className="h-15 w-15 flex items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700">
+          <div className="flex size-16 items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700">
             <User className="size-6 text-gray-600 dark:text-gray-300" />
           </div>
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
