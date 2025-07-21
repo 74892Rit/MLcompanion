@@ -13,7 +13,7 @@ const UploadDataset = () => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_FLASK_API_URL}upload`,
+        `${process.env.NEXT_PUBLIC_FLASK_API_URL}/upload`,
         {
           method: "POST",
           body: formData,

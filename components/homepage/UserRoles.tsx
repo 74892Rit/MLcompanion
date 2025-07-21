@@ -5,13 +5,13 @@ import RoleCard from "./RoleCard";
 
 const UserRolesSection = () => {
   return (
-    <section id="roles" className="bg-gray-50 py-20">
+    <section id="roles" className="bg-gray-50 py-20 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-gray-900">
+          <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
             Designed for Everyone
           </h2>
-          <p className="mx-auto max-w-2xl text-xl text-gray-600">
+          <p className="mx-auto max-w-2xl text-xl text-gray-600 dark:text-white">
             ML Companion serves different roles with specialized features for
             each user type.
           </p>

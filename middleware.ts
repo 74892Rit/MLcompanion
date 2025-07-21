@@ -23,7 +23,7 @@ const publicPaths = [
 
 // ✅ Role-Based Access Control
 const rolePermissions = {
-  student: ["/ExamPortal/Student", "/exam", "/DemoPage"],
+  student: ["/ExamPortal/Student", "/exam", "/DemoPage", "/setting"],
   teacher: ["/ExamPortal/Teacher"],
   admin: ["/ExamPortal/Student", "/ExamPortal/Teacher"],
 };
